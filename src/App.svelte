@@ -22,7 +22,10 @@
     <label for="">CVV</label>
     <input type="number" bind:value={card_info.cvv} min="100" max="9999" />
   </div>
-  <a href="google.com" class="hint">This is an open source project</a>
+  <a
+    href="https://github.com/EladJosef/svelte-credit-card-component"
+    class="hint">This is an open source project</a
+  >
 </main>
 
 <style>
@@ -46,24 +49,24 @@
   input[type="number"],
   input[type="month"] {
     width: 500px;
-    height: 50px;
+    height: 40px;
     padding: 12px 20px;
     margin: 8px 0;
     display: inline-block;
     border: 1px solid rgba(0, 0, 0, 0);
-    border-radius: 20px;
+    border-radius: 13px;
     box-sizing: border-box;
   }
 
   label {
     font-family: "Montserrat", sans-serif;
-    font-size: 25px;
+    font-size: 20px;
     color: #222222;
     display: block;
   }
 
   .hint {
     position: relative;
-    top: 100px;
+    top: 30px;
   }
 </style>
