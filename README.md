@@ -30,4 +30,5 @@ check the web demo at https://svelte-credit-card-component.web.app/
 ## Result
 <img src="https://user-images.githubusercontent.com/25385540/192116257-7672979b-bbd4-4b02-83ec-3b69fc434ab5.gif" width="350" />
 
-
+## License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
