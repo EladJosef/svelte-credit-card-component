@@ -1,5 +1,7 @@
 # Credit Card Svelte Component
 
+<img src="https://raw.githubusercontent.com/EladJosef/svelte-credit-card-component/96cd899a2a21725c8eb48fb158eb541f693353d8/public/banner.svg" width="550" />
+
 ## Component explain
 A simple credit card component based on svelte freamwork
 component support multi issuers (american express, discover, mastercard, visa, jcb, diners-club)
