@@ -7,11 +7,15 @@
     expiry_date: "",
     cvv: null,
   };
+
+  const settings = {
+    background_color: "#222222",
+  };
 </script>
 
 <main>
   <h1 class="title">Credit Card Svelte Component</h1>
-  <CreditCard {card_info} />
+  <CreditCard {card_info} {settings} />
   <div class="card-form">
     <label for="">Card Number</label>
     <input type="text" bind:value={card_info.card_number} maxlength="16" />

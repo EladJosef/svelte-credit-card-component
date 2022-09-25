@@ -16,9 +16,13 @@ check the web demo at https://svelte-credit-card-component.web.app/
     expiry_date: "26/01",
     cvv: 412,
   };
+
+  const settings = {
+    background_color: "#222222",
+  };
 </script>
 
-<CreditCard {card_info} />
+<CreditCard {card_info} {settings} />
 ```
 
 ## Result

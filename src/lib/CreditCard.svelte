@@ -1,27 +1,22 @@
 <script>
-    import card from "../assets/card.svg";
+    import CardBackground from "./CardBackground.svelte";
+    import issuer_data from "../assets/issuer_data.json";
 
     export let card_info;
+    export let settings;
 
+    const color = settings.background_color;
+
+    // credit card titles
     const data_headers = ["Card holder name", "Expiry date", "CVV"];
 
-    const inn_data = {
-        "american-express": [34, 37],
-        discover: [
-            6011,
-            [622126, 622925],
-            [624000, 626999],
-            [628200, 628899],
-            64,
-            65,
-        ],
-        mastercard: [[2221, 2720], 51, 55],
-        visa: [4],
-    };
-
-    function get_card_issuer(card_number) {
+    function get_issuer_name(card_number) {
+        /**
+         * fucntion return issuer name by card number
+         * @param  {[string]} card_number card number
+         */
         let issuer_name = "unknown";
-        Object.entries(inn_data).forEach(([issuer, value]) => {
+        Object.entries(issuer_data.inn).forEach(([issuer, value]) => {
             value.forEach((inn) => {
                 if (typeof inn == "number") {
                     if (card_number.slice(0, `${inn}`.length) == inn) {
@@ -36,43 +31,62 @@
                 }
             });
         });
-        console.log(issuer_name);
         return issuer_name;
     }
 
     function format_card_number(card_number) {
-        return (
-            card_number.slice(0, 4) +
-            " " +
-            card_number.slice(4, 8) +
-            " " +
-            card_number.slice(8, 12) +
-            " " +
-            card_number.slice(12, 16)
-        );
+        /**
+         * fucntion get card number and return formated string of card number
+         * by issuer different formating types
+         * @param  {[string]} card_number card number
+         */
+        let card_format = issuer_data.card_format[get_issuer_name(card_number)];
+        let card_number_format = "";
+        let index = 0;
+
+        card_number = card_number.replace(/[^0-9]/g, "");
+
+        if (!card_format) {
+            card_format = issuer_data.card_format.default;
+        }
+
+        card_format.forEach((card_index) => {
+            card_number_format +=
+                card_number.slice(index, index + card_index) + " ";
+            index += card_index;
+        });
+
+        return card_number_format;
     }
 </script>
 
 <div class="card-container">
-    <img src={card} class="card svelte" alt="credit card" />
-    <div class="card-number">{format_card_number(card_info.card_number)}</div>
+    <!-- card background -->
+    <CardBackground {settings} />
     <div class="card-title">Credit Card</div>
+
+    <div class="card-number">{format_card_number(card_info.card_number)}</div>
+
     <div class="card-holder-name">
         <div class="card-header">{data_headers[0]}</div>
         <div class="card-info">{card_info.holder_name}</div>
     </div>
+
     <div class="expiry-date">
         <div class="card-header">{data_headers[1]}</div>
         <div class="card-info">{card_info.expiry_date}</div>
     </div>
+
     <div class="cvv">
         <div class="card-header">{data_headers[2]}</div>
         <div class="card-info">{card_info.cvv}</div>
     </div>
+
+    <!-- card issusr logo -->
     <img
-        src="{get_card_issuer(card_info.card_number)}.svg"
+        src="{get_issuer_name(card_info.card_number)}.svg"
         alt=""
-        class="credit-card-logo {get_card_issuer(card_info.card_number)}"
+        class="credit-card-logo {get_issuer_name(card_info.card_number)}"
     />
 </div>
 
@@ -93,10 +107,6 @@
 
     img {
         -webkit-user-drag: none;
-    }
-
-    .card {
-        height: 20em;
     }
 
     .card-number {
@@ -173,5 +183,17 @@
         top: 95px;
         width: 90px;
         left: 380px;
+    }
+
+    .diners-club {
+        top: 95px;
+        width: 130px;
+        left: 340px;
+    }
+
+    .jcb {
+        top: 80px;
+        width: 70px;
+        left: 400px;
     }
 </style>
