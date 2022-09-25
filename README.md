@@ -2,7 +2,7 @@
 
 ## Component explain
 A simple credit card component based on svelte freamwork
-component support multi issuers (american express, discover, mastercard, visa)
+component support multi issuers (american express, discover, mastercard, visa, jcb, diners-club)
 check the web demo at https://svelte-credit-card-component.web.app/
 
 ## How to use
